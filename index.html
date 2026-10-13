@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Converter</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<header>
+    <h1>CGPA Converter</h1>
+    <p>Calculate your academic grades easily</p>
+</header>
+
+<main class="container">
+    <nav class="tabs">
+        <button class="tab active" data-tab="percentage">
+            Percentage to CGPA
+        </button>
+        <button class="tab" data-tab="sgpa">
+            SGPA to CGPA
+        </button>
+        <button class="tab" data-tab="marks">
+            Total Marks to CGPA
+        </button>
+    </nav>
+
+    <!-- Percentage to CGPA -->
+    <section id="percentage" class="panel active">
+        <h2>Percentage to CGPA</h2>
+
+        <label for="percentageValue">Percentage (%)</label>
+        <input id="percentageValue" type="number"
+               min="0" max="100" step="any"
+               placeholder="Example: 80">
+
+        <label for="percentageDivisor">Conversion formula</label>
+        <select id="percentageDivisor">
+            <option value="10">Percentage ÷ 10</option>
+            <option value="9.5">Percentage ÷ 9.5</option>
+        </select>
+
+        <button class="action" id="percentageButton">
+            Convert to CGPA
+        </button>
+
+        <div class="result" aria-live="polite">
+            <p>Your CGPA</p>
+            <h2 id="percentageResult">--</h2>
+            <p id="percentageDetails">Out of 10</p>
+        </div>
+    </section>
+
+    <!-- SGPA to CGPA -->
+    <section id="sgpa" class="panel">
+        <h2>SGPA to CGPA</h2>
+
+        <label for="semesterCount">Number of semesters</label>
+        <select id="semesterCount">
+            <option value="1">1 Semester</option>
+            <option value="2" selected>2 Semesters</option>
+            <option value="3">3 Semesters</option>
+            <option value="4">4 Semesters</option>
+            <option value="5">5 Semesters</option>
+            <option value="6">6 Semesters</option>
+            <option value="7">7 Semesters</option>
+            <option value="8">8 Semesters</option>
+        </select>
+
+        <div id="sgpaInputs"></div>
+
+        <button class="action" id="sgpaButton">
+            Calculate CGPA
+        </button>
+
+        <div class="result" aria-live="polite">
+            <p>Your CGPA</p>
+            <h2 id="sgpaResult">--</h2>
+            <p id="sgpaDetails">Out of 10</p>
+        </div>
+    </section>
+
+    <!-- Total marks to CGPA -->
+    <section id="marks" class="panel">
+        <h2>Total Marks to CGPA</h2>
+
+        <label for="obtainedMarks">Marks obtained</label>
+        <input id="obtainedMarks" type="number"
+               min="0" step="any" placeholder="Example: 720">
+
+        <label for="maximumMarks">Maximum marks</label>
+        <input id="maximumMarks" type="number"
+               min="1" step="any" placeholder="Example: 900">
+
+        <label for="marksDivisor">Conversion formula</label>
+        <select id="marksDivisor">
+            <option value="10">Percentage ÷ 10</option>
+            <option value="9.5">Percentage ÷ 9.5</option>
+        </select>
+
+        <button class="action" id="marksButton">
+            Convert to CGPA
+        </button>
+
+        <div class="result" aria-live="polite">
+            <p>Your CGPA</p>
+            <h2 id="marksResult">--</h2>
+            <p id="marksDetails">Out of 10</p>
+        </div>
+    </section>
+
+    <p class="note">
+        Note: Conversion formulas vary by university.
+        Check your institution's official rules.
+    </p>
+</main>
+
+<footer>CGPA Converter | Student Utility</footer>
+
+</body>
+</html>
