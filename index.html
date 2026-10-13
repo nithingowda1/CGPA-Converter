@@ -4,121 +4,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CGPA Converter</title>
+    <meta name="description" content="Calculate CGPA, SGPA and percentage with this simple CGPA converter.">
+    <title>CGPA Converter | Academic Calculator</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
+    <header class="topbar">
+        <a class="brand" href="#">
+            <span class="brand-icon">C</span>
+            <span>CGPA<span class="brand-light">Converter</span></span>
+        </a>
+        <span class="header-tag">ACADEMIC TOOLKIT</span>
+    </header>
 
-<header>
-    <h1>CGPA Converter</h1>
-    <p>Calculate your academic grades easily</p>
-</header>
+    <main class="container">
+        <section class="hero">
+            <div class="hero-copy">
+                <span class="eyebrow"><span class="live-dot"></span> YOUR ACADEMIC COMPANION</span>
+                <h1>Your scores,<br><span>simplified.</span></h1>
+                <p>Convert your academic scores in seconds with a simple, easy-to-use calculator.</p>
+                <div class="hero-points">
+                    <span>✓ Quick calculations</span>
+                    <span>✓ Four conversion tools</span>
+                </div>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+                <div class="grade-card">
+                    <span class="grade-label">YOUR PERFORMANCE</span>
+                    <div class="grade-circle">
+                        <div>
+                            <strong>8.5</strong>
+                            <small>/ 10 CGPA</small>
+                        </div>
+                    </div>
+                    <div class="grade-footer">
+                        <span>Academic progress</span>
+                        <strong>Excellent!</strong>
+                    </div>
+                    <div class="progress-track"><span></span></div>
+                </div>
+                <span class="float-icon float-one">✦</span>
+                <span class="float-icon float-two">✓</span>
+            </div>
+        </section>
 
-<main class="container">
-    <nav class="tabs">
-        <button class="tab active" data-tab="percentage">
-            Percentage to CGPA
-        </button>
-        <button class="tab" data-tab="sgpa">
-            SGPA to CGPA
-        </button>
-        <button class="tab" data-tab="marks">
-            Total Marks to CGPA
-        </button>
-    </nav>
+        <section class="workspace">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">CONVERSION CENTER</span>
+                    <h2>Choose your calculator</h2>
+                    <p>Select a conversion type to get started.</p>
+                </div>
+                <span class="scale-badge">10-point scale</span>
+            </div>
 
-    <!-- Percentage to CGPA -->
-    <section id="percentage" class="panel active">
-        <h2>Percentage to CGPA</h2>
+            <div class="tabs" role="tablist" aria-label="Conversion types">
+                <button class="tab active" id="tab-percentage" role="tab"
+                    aria-selected="true" aria-controls="panel-percentage"
+                    data-panel="panel-percentage">Percentage to CGPA</button>
+                <button class="tab" id="tab-sgpa" role="tab"
+                    aria-selected="false" aria-controls="panel-sgpa"
+                    data-panel="panel-sgpa">SGPA to CGPA</button>
+                <button class="tab" id="tab-marks" role="tab"
+                    aria-selected="false" aria-controls="panel-marks"
+                    data-panel="panel-marks">Total Marks to CGPA</button>
+                <button class="tab" id="tab-reverse" role="tab"
+                    aria-selected="false" aria-controls="panel-reverse"
+                    data-panel="panel-reverse">CGPA to Percentage</button>
+            </div>
 
-        <label for="percentageValue">Percentage (%)</label>
-        <input id="percentageValue" type="number"
-               min="0" max="100" step="any"
-               placeholder="Example: 80">
+            <div class="calculator-card">
+                <!-- 1. Percentage to CGPA -->
+                <section class="panel" id="panel-percentage" role="tabpanel"
+                    aria-labelledby="tab-percentage">
+                    <div class="panel-heading">
+                        <span class="panel-icon">%</span>
+                        <div>
+                            <h3>Percentage to CGPA</h3>
+                            <p>Convert your percentage into a CGPA score.</p>
+                        </div>
+                    </div>
+                    <form id="percentageForm" class="converter-form">
+                        <div class="field">
+                            <label for="percentageInput">Your percentage (%)</label>
+                            <input id="percentageInput" type="number" min="0"
+                                max="100" step="any" placeholder="e.g. 85" required>
+                        </div>
+                        <div class="field">
+                            <label for="percentageFormula">Conversion formula</label>
+                            <select id="percentageFormula">
+                                <option value="10">Percentage ÷ 10</option>
+                                <option value="9.5">Percentage ÷ 9.5</option>
+                            </select>
+                        </div>
+                        <button class="primary-button" type="submit">
+                            Calculate CGPA <span>→</span>
+                        </button>
+                    </form>
+                    <div class="result" id="percentageResult" aria-live="polite" hidden></div>
+                </section>
 
-        <label for="percentageDivisor">Conversion formula</label>
-        <select id="percentageDivisor">
-            <option value="10">Percentage ÷ 10</option>
-            <option value="9.5">Percentage ÷ 9.5</option>
-        </select>
+                <!-- 2. SGPA to CGPA -->
+                <section class="panel" id="panel-sgpa" role="tabpanel"
+                    aria-labelledby="tab-sgpa" hidden>
+                    <div class="panel-heading">
+                        <span class="panel-icon">Σ</span>
+                        <div>
+                            <h3>SGPA to CGPA</h3>
+                            <p>Calculate your average SGPA across semesters.</p>
+                        </div>
+                    </div>
+                    <form id="sgpaForm" class="converter-form">
+                        <div class="field">
+                            <label for="semesterCount">Number of semesters</label>
+                            <select id="semesterCount">
+                                <option value="1">1 semester</option>
+                                <option value="2">2 semesters</option>
+                                <option value="3">3 semesters</option>
+                                <option value="4">4 semesters</option>
+                                <option value="5">5 semesters</option>
+                                <option value="6">6 semesters</option>
+                                <option value="7">7 semesters</option>
+                                <option value="8" selected>8 semesters</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Enter SGPA for each semester</label>
+                            <div id="sgpaInputs" class="sgpa-grid"></div>
+                        </div>
+                        <button class="primary-button" type="submit">
+                            Calculate CGPA <span>→</span>
+                        </button>
+                    </form>
+                    <div class="result" id="sgpaResult" aria-live="polite" hidden></div>
+                    <p class="note">This calculator uses a simple average. Some universities require credit-weighted CGPA calculations.</p>
+                </section>
 
-        <button class="action" id="percentageButton">
-            Convert to CGPA
-        </button>
+                <!-- 3. Total Marks to CGPA -->
+                <section class="panel" id="panel-marks" role="tabpanel"
+                    aria-labelledby="tab-marks" hidden>
+                    <div class="panel-heading">
+                        <span class="panel-icon">▤</span>
+                        <div>
+                            <h3>Total Marks to CGPA</h3>
+                            <p>Use your obtained marks and maximum marks.</p>
+                        </div>
+                    </div>
+                    <form id="marksForm" class="converter-form">
+                        <div class="field">
+                            <label for="obtainedMarks">Marks obtained</label>
+                            <input id="obtainedMarks" type="number" min="0"
+                                step="any" placeholder="e.g. 720" required>
+                        </div>
+                        <div class="field">
+                            <label for="maximumMarks">Maximum marks</label>
+                            <input id="maximumMarks" type="number" min="0.01"
+                                step="any" placeholder="e.g. 900" required>
+                        </div>
+                        <div class="field full-width">
+                            <label for="marksFormula">Conversion formula</label>
+                            <select id="marksFormula">
+                                <option value="10">Percentage ÷ 10</option>
+                                <option value="9.5">Percentage ÷ 9.5</option>
+                            </select>
+                        </div>
+                        <button class="primary-button" type="submit">
+                            Calculate CGPA <span>→</span>
+                        </button>
+                    </form>
+                    <div class="result" id="marksResult" aria-live="polite" hidden></div>
+                </section>
 
-        <div class="result" aria-live="polite">
-            <p>Your CGPA</p>
-            <h2 id="percentageResult">--</h2>
-            <p id="percentageDetails">Out of 10</p>
-        </div>
-    </section>
+                <!-- 4. CGPA to Percentage -->
+                <section class="panel" id="panel-reverse" role="tabpanel"
+                    aria-labelledby="tab-reverse" hidden>
+                    <div class="panel-heading">
+                        <span class="panel-icon">↗</span>
+                        <div>
+                            <h3>CGPA to Percentage</h3>
+                            <p>Convert your CGPA into a percentage score.</p>
+                        </div>
+                    </div>
+                    <form id="reverseForm" class="converter-form">
+                        <div class="field">
+                            <label for="cgpaInput">Your CGPA (out of 10)</label>
+                            <input id="cgpaInput" type="number" min="0" max="10"
+                                step="any" placeholder="e.g. 8.5" required>
+                        </div>
+                        <div class="field">
+                            <label for="reverseFormula">Conversion formula</label>
+                            <select id="reverseFormula">
+                                <option value="10">CGPA × 10</option>
+                                <option value="9.5">CGPA × 9.5</option>
+                            </select>
+                        </div>
+                        <button class="primary-button" type="submit">
+                            Convert to Percentage <span>→</span>
+                        </button>
+                    </form>
+                    <div class="result" id="reverseResult" aria-live="polite" hidden></div>
+                    <p class="note">Use the formula specified by your university for official results.</p>
+                </section>
+            </div>
+        </section>
 
-    <!-- SGPA to CGPA -->
-    <section id="sgpa" class="panel">
-        <h2>SGPA to CGPA</h2>
+        <section class="info-strip">
+            <div class="info-icon">i</div>
+            <div>
+                <strong>Calculation note</strong>
+                <p>Conversion rules vary between universities. These calculators use the formula you select and provide estimates, not official academic records.</p>
+            </div>
+        </section>
+    </main>
 
-        <label for="semesterCount">Number of semesters</label>
-        <select id="semesterCount">
-            <option value="1">1 Semester</option>
-            <option value="2" selected>2 Semesters</option>
-            <option value="3">3 Semesters</option>
-            <option value="4">4 Semesters</option>
-            <option value="5">5 Semesters</option>
-            <option value="6">6 Semesters</option>
-            <option value="7">7 Semesters</option>
-            <option value="8">8 Semesters</option>
-        </select>
-
-        <div id="sgpaInputs"></div>
-
-        <button class="action" id="sgpaButton">
-            Calculate CGPA
-        </button>
-
-        <div class="result" aria-live="polite">
-            <p>Your CGPA</p>
-            <h2 id="sgpaResult">--</h2>
-            <p id="sgpaDetails">Out of 10</p>
-        </div>
-    </section>
-
-    <!-- Total marks to CGPA -->
-    <section id="marks" class="panel">
-        <h2>Total Marks to CGPA</h2>
-
-        <label for="obtainedMarks">Marks obtained</label>
-        <input id="obtainedMarks" type="number"
-               min="0" step="any" placeholder="Example: 720">
-
-        <label for="maximumMarks">Maximum marks</label>
-        <input id="maximumMarks" type="number"
-               min="1" step="any" placeholder="Example: 900">
-
-        <label for="marksDivisor">Conversion formula</label>
-        <select id="marksDivisor">
-            <option value="10">Percentage ÷ 10</option>
-            <option value="9.5">Percentage ÷ 9.5</option>
-        </select>
-
-        <button class="action" id="marksButton">
-            Convert to CGPA
-        </button>
-
-        <div class="result" aria-live="polite">
-            <p>Your CGPA</p>
-            <h2 id="marksResult">--</h2>
-            <p id="marksDetails">Out of 10</p>
-        </div>
-    </section>
-
-    <p class="note">
-        Note: Conversion formulas vary by university.
-        Check your institution's official rules.
-    </p>
-</main>
-
-<footer>CGPA Converter | Student Utility</footer>
-
+    <footer>
+        <span class="footer-brand">CGPA Converter</span>
+        <span>Made for simpler score calculations.</span>
+    </footer>
 </body>
 </html>
